@@ -79,7 +79,6 @@ router.post("/login", async (req, res) => {
     const data = loginSchema.parse(req.body);
     const user = await prisma.user.findUnique({
       where: { email: data.email },
-      include: { sellerProfile: true },
     });
     if (!user) return res.status(401).json({ error: "Invalid credentials" });
 
