@@ -11,7 +11,6 @@ router.get("/dashboard", requireAuth, requireActiveSeller, async (req, res) => {
       products: { orderBy: { createdAt: "desc" } },
     },
   });
-  if (!seller) return res.status(404).json({ error: "Seller profile not found" });
 
   const orderItems = await prisma.orderItem.findMany({
     where: { product: { sellerId: seller.id } },
